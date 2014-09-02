@@ -1,25 +1,36 @@
-<h1>Listing marques</h1>
-
-<table>
+<%- model_class = Marque -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => Marque %></h1>
+</div>
+<table class="table table-striped">
   <thead>
     <tr>
-      <th>Label</th>
-      <th colspan="3"></th>
+      <th>ID</th>
+      <th><%= model_class.human_attribute_name(:label) %></th>
+      <th><%= model_class.human_attribute_name(:created_at) %></th>
+      <th><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
   </thead>
-
   <tbody>
     <% @marques.each do |marque| %>
       <tr>
+        <td><%= marque.id %></td>
         <td><%= marque.label %></td>
-        <td><%= link_to 'Show', marque %></td>
-        <td><%= link_to 'Edit', edit_marque_path(marque) %></td>
-        <td><%= link_to 'Destroy', marque, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%=l marque.created_at, format: :long %></td>
+        <td>
+          <%= link_to marque_path(marque), :class => 'btn btn-xs', :title => "#{ t('.show', :default => t('helpers.links.show')) }" do %>
+            <%= glyph 'info-sign' %>
+            <%= glyph 'pencil' %>
+          <%- end -%>
+          <%= link_to marque_path(marque), :method => :delete, :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-xs', :title => "#{ t('.destroy', :default => t('helpers.links.destroy')) }" do %>
+            <%= glyph 'remove' %>
+          <%- end -%>
+        </td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
-<br>
-
-<%= link_to 'New Marque', new_marque_path %>
+<%= link_to t('.new', :default => t("helpers.links.new")),
+            new_marque_path,
+            :class => 'btn btn-primary' %>

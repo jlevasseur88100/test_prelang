@@ -1,9 +1,24 @@
-<p id="notice"><%= notice %></p>
+<%- model_class = Marque -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => Marque %></h1>
+</div>
 
-<p>
-  <strong>Label:</strong>
-  <%= @marque.label %>
-</p>
+<div class="fieldset">
+  <dl>
+      <dt class="label label-default"><%= model_class.human_attribute_name(:label) %></dt>
+      <dd><pre class="prettyprint"><%= @marque.label %></pre></dd>
+  </dl>
+</div>
 
-<%= link_to 'Edit', edit_marque_path(@marque) %> |
-<%= link_to 'Back', marques_path %>
+<div class="form-group">
+  <%= link_to t('.back', :default => t("helpers.links.back")),
+              marques_path, :class => 'btn btn-default'  %>
+  <%= link_to t('.edit', :default => t("helpers.links.edit")),
+              edit_marque_path(@marque), :class => 'btn btn-default' %>
+  <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+              marque_path(@marque),
+              :method => 'delete',
+              :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+              :class => 'btn btn-danger' %>
+</div>
+
