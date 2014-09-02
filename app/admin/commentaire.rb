@@ -1,4 +1,5 @@
 ActiveAdmin.register Commentaire do
+  permit_params :description
 
 
   # See permitted parameters documentation:
