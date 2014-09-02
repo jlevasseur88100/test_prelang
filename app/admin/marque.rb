@@ -1,4 +1,5 @@
 ActiveAdmin.register Marque do
+  permit_params :label
 
 
   # See permitted parameters documentation:
